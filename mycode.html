@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script src="myjscode.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <fieldset><legend>CHOOSE ClASS</legend>
+            <select id="searchByclassname" >
+
+                    <option value="">-select-</option>
+
+                    <option value="CLASS-8">CLASS-8<sup>th</sup></option>
+
+                    <option value="CLASS-9">CLASS-9<sup>th</sup></option>
+
+                </select>
+        </fieldset>
+        <fieldset>
+        <legend id="class">CLASS-NAME</legend>
+        <p>HERE IS THE LIST OF SUBJECTS IN CLASS<p>
+            <select id="searchBysubjectname" >
+
+                <option value="">-select-</option>
+                
+                <option value="ENGLISH">ENGLISH</option>
+                
+                <option value="HINDI">HINDI</option>
+                
+                <option value="MATHS">MATHS</option>
+                
+                <option value="SCIENCE">SCIENCE</option>
+                
+                </select>
+                <hr>
+                <p>HERE IS THE LIST OF AVAILABLE SLOTS</p>
+                <select id="searchBytimeslot"  onchange="buildtimetableforsubject()">
+
+                        <option value="">-select-</option>
+                        
+                        <option value="slot1">8:00-9:00AM</option>
+                        
+                        <option value="slot2">9:00-10:00AM</option>
+
+                        <optoin value="">RECESS</optoin>
+                        
+                        <option value="slot3">10:00-11:00AM</option>
+                        
+                        <option value="slot4">12:00-1:00PM</option>
+                    
+                        </select>
+    </fieldset>
+    <fieldset id="result"><legend  id="legendsubject">TIME TABLE FOR SUBJECT</legend>
+    <div id="timetable"></div>
+    <div id="timetable2"></div>
+    </fieldset>
+</body>
+</html>
