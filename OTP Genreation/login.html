@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+<script>
+function SaveUser(){
+    var Name=document.getElementById('FirstName').value;
+    var Email=document.getElementById('Email').value;
+    const baseUrl = 'http://localhost:1269/users';
+            fetch(baseUrl+'/add',{
+                    method : 'POST',
+                    headers:{
+                        'content-type': 'application/json'
+                    },
+                    body:JSON.stringify({
+                        email: Email,
+                        name: Name
+                        })
+                })
+                .then(response=>response.json())
+GenerateOTP();
+}
+function GenerateOTP(){
+    var Name=document.getElementById('FirstName').value;
+    var Email=document.getElementById('Email').value;
+    window.currenttime=new Date();
+    currenttime.setMinutes( currenttime.getMinutes() + 5 );
+    console.log(currenttime);
+    let content='<h2 align="center">OTP</h2><br>'+ Name + '@786';
+            const baseUrl = 'http://localhost:1269/users';
+            fetch(baseUrl+'/email',{
+                    method : 'POST',
+                    headers:{
+                        'content-type': 'application/json'
+                    },
+                    body:JSON.stringify({
+                        email: Email,
+                        CONTENT: content
+                        })
+                })
+                .then(response=>response.json())
+}
+function VerifyOTP(){
+    var verifytime= new Date();
+    var Email=document.getElementById('Email').value;
+    const baseUrl = 'http://localhost:1269/users';
+            fetch(baseUrl+'/find',{
+                    method : 'POST',
+                    headers:{
+                        'content-type': 'application/json'
+                    },
+                    body:JSON.stringify({
+                        email: Email,
+                        })
+                })
+                .then(response=>response.json())
+                .then((response)=>{
+                    if(verifytime<window.currenttime){
+    //console.log('YOU MADE IT IN TIME');
+    Name=response.result[0].name
+    console.log(response.result[0].name);
+    OTP=document.getElementById('OTP').value;
+    if(OTP==Name+'@786'){
+        console.log('CONGRATS YOU ARE A VALID USER');
+        document.location='Home.html'
+    }
+    else{
+        console.log('SORRY PLEASE PROVIDE VALID OTP')
+    }
+    }
+    else{
+        console.log('SORRY REGISTER AGAIN');
+    }
+        });
+}
+</script>
+</head>
+<body>
+<fieldset><legend>LOGIN</legend>
+<input type="text" id="FirstName" > NAME<br>
+<input type="email" id="Email"> EMAIL<br>
+<input type="button" id="SUBMIT" value="SUBMIT" onclick="SaveUser()"><br><br>
+<hr>
+<input type="text" id="OTP"> OTP<br>
+<input type="button" id="SUBMIT" value="SUBMITOTP" onclick="VerifyOTP()">
+</fieldset>
+</body>
+</html>
